@@ -1,2 +1,8 @@
 # racecar_localizer
-This is software made for the slotracer innovation project. It is made for position determination of the slotrace cars. 
+This is the racecar localizer software. Right now just a script that filters out everything except green colours. 
+
+To run install python and opencv. 
+
+TO DO:
+
+- Blob detection to detect circle 
