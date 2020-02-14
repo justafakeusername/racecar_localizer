@@ -16,20 +16,19 @@ params.maxThreshold = 200
 # Filter by Area.
 params.filterByArea = True
 params.minArea = 3000
+params.maxArea = 100000
 
 # Filter by Circularity
 params.filterByCircularity = True
-params.minCircularity = 0.9
+params.minCircularity = 0.1
 
 # Filter by Convexity
-params.filterByConvexity = True
+params.filterByConvexity = False
 params.minConvexity = 0.87
 
 # Filter by Inertia
-params.filterByInertia = True
+params.filterByInertia = False
 params.minInertiaRatio = 0.01
-
-doei = testing * 1
 
 camera = cv2.VideoCapture(0)
 print(camera.isOpened())
@@ -49,14 +48,19 @@ for x in range(1000):
     blobs = detector.detect(image)
 
 
-    mask = cv2.inRange(hsv, (0, 150, 0), (255, 255,255))
+    mask = cv2.inRange(hsv, (0, 20, 0), (90, 255,90))
 
     ## slice the green
     imask = mask>0
     green = np.zeros_like(image, np.uint8)
     green[imask] = image[imask]
+    # green = image
 
     keypoints = detector.detect(green)
+   
+    print(keypoints)
+    for x in keypoints:
+        print(x.size)
 
     im_with_keypoints = cv2.drawKeypoints(green, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
  
